@@ -18,6 +18,22 @@
     return false;
   }
 
+  // Returns true if the click coordinate is directly over a text node
+  function isOverText(x, y) {
+    const range = document.caretRangeFromPoint(x, y);
+    if (!range) return false;
+    const node = range.startContainer;
+    if (node.nodeType !== Node.TEXT_NODE) return false;
+    if (getComputedStyle(node.parentElement).userSelect === 'none') return false;
+    // Verify the coordinate actually falls within the text node's bounding rects
+    const textRange = document.createRange();
+    textRange.selectNode(node);
+    for (const rect of textRange.getClientRects()) {
+      if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) return true;
+    }
+    return false;
+  }
+
   // Walk up the DOM to find the nearest scrollable ancestor
   function findScrollable(el) {
     let node = el;
@@ -44,7 +60,7 @@
   }
 
   document.addEventListener('mousedown', (e) => {
-    if (!enabled || e.button !== 0 || isInteractive(e.target)) return;
+    if (!enabled || e.button !== 0 || isInteractive(e.target) || isOverText(e.clientX, e.clientY)) return;
     dragging = true;
     moved = false;
     startX = e.clientX;
