@@ -1,5 +1,9 @@
 # FanScroll — Sensu (扇子)
 
+<p align="center">
+  <img src="icon128.png" width="96" alt="FanScroll icon" />
+</p>
+
 A Chrome/Edge extension that lets you scroll any webpage by clicking and dragging the background — just like on mobile.
 
 Inspired by the Japanese *Sensu* (扇子) fan: open it up and let the page flow.
