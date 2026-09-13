@@ -18,7 +18,7 @@
     return false;
   }
 
-  // クリック位置から上に向かってスクロール可能な要素を探す
+  // Walk up the DOM to find the nearest scrollable ancestor
   function findScrollable(el) {
     let node = el;
     while (node && node !== document.documentElement) {
@@ -30,7 +30,7 @@
       if (canScrollY || canScrollX) return node;
       node = node.parentElement;
     }
-    // 見つからなければwindow
+    // Fall back to window if no scrollable ancestor found
     return window;
   }
 
