@@ -1,0 +1,7 @@
+# Development only — do not publish
+debug.js
+icon.svg
+
+# OS
+.DS_Store
+Thumbs.db
